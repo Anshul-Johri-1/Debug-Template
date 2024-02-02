@@ -1,6 +1,21 @@
 # Ultimate C++ Debug Template
 Frustrated with keeping track of variables in different functions? Say goodbye to the hassle with our easy-to-use template! <br> It's designed to handle all data types, making it simple to see variable statuses throughout your program.
 
+## Usage 
+```c++
+vector<int> v;
+for (int i = 1; i <= 3; i++)
+{
+    v.push_back(i);
+    debug(i, v);
+}
+/*
+Output :
+23: [i = 1 || v = {1}]
+23: [i = 2 || v = {1,2}]
+23: [i = 3 || v = {1,2,3}]
+*/
+```
 This template supports datatypes such as:
 
 - Primitive: `int`, `char`, `bool`, `long long int` etc.
