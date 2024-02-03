@@ -6,20 +6,19 @@ Frustrated with keeping track of variables in different functions? Say goodbye t
 vector<int> v;
 for (int i = 1; i <= 3; i++)
 {
-    v.push_back(i);
+    v.push_back(i*i);
     debug(i, v);
 }
-/*
-Output :
+
+// Output :
 23: [i = 1 || v = {1}]
-23: [i = 2 || v = {1,2}]
-23: [i = 3 || v = {1,2,3}]
-*/
+23: [i = 2 || v = {1,4}]
+23: [i = 3 || v = {1,4,9}]
 ```
 This template supports datatypes such as:
 
 - Primitive: `int`, `char`, `bool`, `long long int` etc.
-- STL: `vector`, `set`, `map`, `stack`, `queue`, `priority_queue`, `bitset` etc.
+- STL: `pair`, `tuple`, `vector`, `set`, `map`, `stack`, `queue`, `priority_queue`, `bitset` etc.
 - Arrays of all datatypes: `int arr[]`, `bool arr[]`, `vector<int> adj[]` etc.
 - Matrix: `int mat[100][200]`, `vector<vector<bool>> vis(100, vector<bool> (200, 0))` etc.
 - Decayed Arrays / Matrices.
@@ -33,20 +32,17 @@ Additionally, you can use it in online coding environments like **LeetCode** for
 
 Let's say you have different datatypes such as:
 ```c++
-char Char = 10;
+char Char = 'A';
 int arr[] = {1, 2, 3, 4};
 bitset<8> Bitset(100);
-string String = "Hello World";
-vector<vector<int>> vectorVectorInt = {{1, 2, 3, 4, 5}, {10, 20, 30}};
-set<int> setInt{1, 2, 3, 4};
 map<string, int> map_String_Int = {{"apple", 5}, {"banana", 3}, {"orange", 7}};
-stack<int> Stack;
-queue<int> Queue;
-priority_queue<int> MaxHeap;
 ```
 You can debug them like this `debug(var1, var2, var3, var4, ...);`
 ```c++ 
 debug(Char, arr, Bitset, map_String_Int);
+
+// Output
+21: [Char = 'A' || arr = {1,2,3,4} || Bitset = 01100100 || map_String_Int = {("apple",5),("banana",3),("orange",7)}]
 ```
 In instances where arrays / matrices have decayed into pointers, use `debugArr(arr, n);`
 
@@ -60,27 +56,40 @@ In instances where arrays / matrices have decayed into pointers, use `debugArr(a
 ## How to Setup?
 
 - Copy this template into your own templates. The output will be directed to the stderr stream.
+- Alternatively you can make a separate header file and include this into your template.
+  ```c++
+  #ifndef ONLINE_JUDGE
+  #include "template.cpp"
+  #else
+  #define debug(...)
+  #define debugArr(arr, n)
+  #endif
+  ```
 - When using it for LeetCode uncomment `#define cerr cout` and before submitting change `#ifndef` to `#ifdef` to ignore `debug(...);`. For convenience, after changing it, copy it, and keep it pinned in your clipboard for repetitive use.
 
 **For Complete Beginners who need step by step tutorial (using VS Code), follow these steps:**
+<details>
+  <summary> <strong> Steps </strong> </summary>
+  
+  1. Open VS Code
+  2. Press **Ctrl + Shift + P** to open Command Pallete
+  3. Search **Configure User Snippet** and click on _cpp.json_
+  4. Now copy the content of _cpp.json_ in this Github Repository and paste it into your _cpp.json_ file
+  5. Now you have configured your user snippets. Create a _main.cpp_ file and type **cod** and press TAB!!! Magic!!! <br>
+  **cod** for CodeForces <br>
+  **lee** for LeetCode <br>
+  **boi** for Boiler Plate Code 
 
-1. Open VS Code
-2. Press **Ctrl + Shift + P** to open Command Pallete
-3. Search **Configure User Snippet** and click on _cpp.json_
-4. In my github link, there's a file _cpp.json_, copy its content and paste it into your _cpp.json_ file
-5. Now you have configured your user snippets. Create a _main.cpp_ file and type **cod** and press TAB!!! Magic!!! <br>
-**cod** for CodeForces <br>
-**lee** for LeetCode <br>
-**boi** for Boiler Plate Code 
+  Additionally, you can install `Competitive Programming Helper` extension from VS Code to make your journey easy.
 
-Additionally, you can install `Competitive Programming Helper` extension from VS Code to make your journey easy.
+  Now for LeetCode
 
-Now for LeetCode
+  1. Uncomment `#define cerr cout` and copy this template
+  2. Keep it pinned in your clipboard. If you are using windows, you can press **Win + V** to open clipboard.
+  3. When solving DSA problems in LeetCode, paste this above `class Solution` and use debug normally.
+  4. Before submitting, change `#ifndef` to `#ifdef` to ignore `debug(...);`.
+</details>
 
-1. Uncomment `#define cerr cout` and copy this template
-2. Keep it pinned in your clipboard. If you are using windows, you can press **Win + V** to open clipboard.
-3. When solving DSA problems in LeetCode, paste this above `class Solution` and use debug normally.
-4. Before submitting, change `#ifndef` to `#ifdef` to ignore `debug(...);`.
+<br>
 
-
-To all those people who might think that this template is too long, you change it to one liner too. If you use _format on save_ , you can take advantage of `/* clang-format off */` to keep it one line.
+If you feel like template is too long, you can change it to one liner too. If you use _format on save_ , you can take advantage of `/* clang-format off */` to keep it one line.
