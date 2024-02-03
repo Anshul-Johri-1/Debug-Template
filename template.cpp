@@ -49,10 +49,8 @@ namespace _DEBUG_UTIL_
     void print(tuple<T...> x);
     template <typename F, typename S>
     void print(pair<F, S> x);
-    template <typename T>
-    void print(priority_queue<T> pq);
-    template <typename T>
-    void print(priority_queue<T, vector<T>, greater<T>> pq);
+    template <typename... T>
+    void print(priority_queue<T...> pq);
     template <typename T>
     void print(stack<T> st);
     template <typename T>
@@ -118,17 +116,8 @@ namespace _DEBUG_UTIL_
         print(x.second);
         cerr << ')';
     }
-    template <typename T>
-    void print(priority_queue<T> pq)
-    {
-        int f = 0;
-        cerr << '{';
-        while (!pq.empty())
-            cerr << (f++ ? "," : ""), print(pq.top()), pq.pop();
-        cerr << "}";
-    }
-    template <typename T>
-    void print(priority_queue<T, vector<T>, greater<T>> pq)
+    template <typename... T>
+    void print(priority_queue<T...> pq)
     {
         int f = 0;
         cerr << '{';
