@@ -159,9 +159,9 @@ namespace _DEBUG_UTIL_
         int bracket = 0, i = 0;
         while (names[i] != ',' or bracket != 0)
         {
-            if (names[i] == '(')
+            if (names[i] == '(' or names[i] == '<' or names[i] == '{')
                 bracket++;
-            else if (names[i] == ')')
+            else if (names[i] == ')' or names[i] == '>' or names[i] == '}')
                 bracket--;
             i++;
         }
