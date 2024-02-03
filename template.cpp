@@ -39,22 +39,22 @@ namespace _DEBUG_UTIL_
     /* Templates Declarations to support nested datatypes */
     template <typename T>
     void print(T x);
-    template <typename T>
-    void print(vector<vector<T>> mat);
+    template <typename... T>
+    void print(vector<vector<T...>> mat);
     template <typename T, size_t N>
     void print(T (&arr)[N]);
     template <typename T, size_t N, size_t M>
     void print(T (&mat)[N][M]);
-    template <typename... T>
-    void print(tuple<T...> x);
     template <typename F, typename S>
     void print(pair<F, S> x);
     template <typename... T>
+    void print(tuple<T...> x);
+    template <typename... T>
     void print(priority_queue<T...> pq);
-    template <typename T>
-    void print(stack<T> st);
-    template <typename T>
-    void print(queue<T> q);
+    template <typename... T>
+    void print(stack<T...> st);
+    template <typename... T>
+    void print(queue<T...> q);
     /* Template Datatypes Definitions */
     template <typename T>
     void print(T x)
@@ -66,8 +66,8 @@ namespace _DEBUG_UTIL_
             cerr << (f++ ? "," : ""), print(i);
         cerr << "}";
     }
-    template <typename T>
-    void print(vector<vector<T>> mat)
+    template <typename... T>
+    void print(vector<vector<T...>> mat)
     {
         /* Specialized for 2D to format every 1D in new line */
         int f = 0;
@@ -96,16 +96,6 @@ namespace _DEBUG_UTIL_
             cerr << (f++ ? ",\n" : ""), print(i);
         cerr << "}\n";
     }
-    template <typename... T>
-    void print(tuple<T...> x)
-    {
-        int f = 0;
-        cerr << '(';
-        apply([&f](auto... args)
-              { ((cerr << (f++ ? "," : ""), print(args)), ...); },
-              x);
-        cerr << ')';
-    }
     template <typename F, typename S>
     void print(pair<F, S> x)
     {
@@ -117,6 +107,16 @@ namespace _DEBUG_UTIL_
         cerr << ')';
     }
     template <typename... T>
+    void print(tuple<T...> x)
+    {
+        int f = 0;
+        cerr << '(';
+        apply([&f](auto... args)
+              { ((cerr << (f++ ? "," : ""), print(args)), ...); },
+              x);
+        cerr << ')';
+    }
+    template <typename... T>
     void print(priority_queue<T...> pq)
     {
         int f = 0;
@@ -125,8 +125,8 @@ namespace _DEBUG_UTIL_
             cerr << (f++ ? "," : ""), print(pq.top()), pq.pop();
         cerr << "}";
     }
-    template <typename T>
-    void print(stack<T> st)
+    template <typename... T>
+    void print(stack<T...> st)
     {
         int f = 0;
         cerr << '{';
@@ -134,8 +134,8 @@ namespace _DEBUG_UTIL_
             cerr << (f++ ? "," : ""), print(st.top()), st.pop();
         cerr << "}";
     }
-    template <typename T>
-    void print(queue<T> q)
+    template <typename... T>
+    void print(queue<T...> q)
     {
         int f = 0;
         cerr << '{';
