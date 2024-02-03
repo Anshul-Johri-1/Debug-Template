@@ -1,5 +1,5 @@
-#ifndef TEMPLATE_CPP
-#define TEMPLATE_CPP
+#ifndef DEBUG_TEMPLATE_CPP
+#define DEBUG_TEMPLATE_CPP
 #include <bits/stdc++.h>
 /* Uncomment following line to see Debug code on leetcode */
 // #define cerr cout
@@ -242,6 +242,5 @@ namespace _DEBUG_UTIL_
 #else
 #define debug(...)
 #define debugArr(arr, n)
-#endif
 #endif
 #endif
