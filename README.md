@@ -72,13 +72,12 @@ In instances where arrays / matrices have decayed into pointers, use `debugArr(a
   <summary> <strong> Steps </strong> </summary>
   
   1. Open VS Code
-  2. Press **Ctrl + Shift + P** to open Command Pallete
-  3. Search **Configure User Snippet** and click on _cpp.json_
-  4. Now copy the content of _cpp.json_ in this Github Repository and paste it into your _cpp.json_ file
-  5. Now you have configured your user snippets. Create a _main.cpp_ file and type **cod** and press TAB!!! Magic!!! <br>
-  **cod** for CodeForces <br>
-  **lee** for LeetCode <br>
-  **boi** for Boiler Plate Code 
+  2. In your workspace, create a file _template.cpp_
+  3. Copy content of my _template.cpp_ into your _template.cpp_
+  4. Press **Ctrl + Shift + P** to open Command Pallete
+  5. Search **Configure User Snippet** and click on _cpp.json_
+  6. Now copy the content of my _cpp.json_ into your _cpp.json_ file
+  7. Now you have configured your user snippets. Create a _main.cpp_ file and type **wow** and press TAB!!! Magic!!! <br>
 
   Additionally, you can install `Competitive Programming Helper` extension from VS Code to make your journey easy.
 
