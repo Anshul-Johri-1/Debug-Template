@@ -1,3 +1,5 @@
+#ifndef TEMPLATE_CPP
+#define TEMPLATE_CPP
 #include <bits/stdc++.h>
 /* Uncomment following line to see Debug code on leetcode */
 // #define cerr cout
@@ -35,6 +37,12 @@ namespace _DEBUG_UTIL_
         cerr << "}";
     }
     /* Templates Declarations to support nested datatypes */
+    template <typename T, size_t N>
+    struct Tuple;
+    template <typename T>
+    struct Tuple<T, 1>;
+    template <typename... Args>
+    void print(tuple<Args...> t);
     template <typename T>
     void print(T x);
     template <typename T>
@@ -54,6 +62,27 @@ namespace _DEBUG_UTIL_
     template <typename T>
     void print(queue<T> q);
     /* Template Datatypes Definitions */
+    template <typename T, size_t N>
+    struct Tuple
+    {
+        static void printTuple(T t)
+        {
+            Tuple<T, N - 1>::printTuple(t);
+            cerr << ",", print(get<N - 1>(t));
+        }
+    };
+    template <typename T>
+    struct Tuple<T, 1>
+    {
+        static void printTuple(T t) { print(get<0>(t)); }
+    };
+    template <typename... Args>
+    void print(tuple<Args...> t)
+    {
+        cerr << "(";
+        Tuple<decltype(t), sizeof...(Args)>::printTuple(t);
+        cerr << ")";
+    }
     template <typename T>
     void print(T x)
     {
@@ -186,4 +215,5 @@ namespace _DEBUG_UTIL_
 #else
 #define debug(...)
 #define debugArr(arr, n)
+#endif
 #endif
