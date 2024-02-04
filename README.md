@@ -25,6 +25,10 @@ This template supports datatypes such as:
 - Rvalue Literals like `"Hello"`, `false`, `'z'`, `isSafe(i, j), dfs(u)` etc.  
 - Even complicated nested datatypes like: `map<string, vector<pair<char, unordered_set<long long>>>> WHATTT;` etc.
 
+Coloured version of this template is also supported. (Terminal Only)
+
+<img src="colouredTemplate.png" style="width: 60%; min-width: 500px;">
+
 You can use it on your computer when doing coding challenges on sites like **CodeForces**. <br>
 Additionally, you can use it in online coding environments like **LeetCode** for practicing data structures and algorithms.
 
