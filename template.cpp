@@ -2,7 +2,7 @@
 #define DEBUG_TEMPLATE_CPP
 #include <bits/stdc++.h>
 // #define cerr cout
-namespace _DEBUG_UTIL_
+namespace __DEBUG_UTIL__
 {
     using namespace std;
     /* Primitive Datatypes Print */
@@ -158,8 +158,8 @@ namespace _DEBUG_UTIL_
     }
 }
 #ifndef ONLINE_JUDGE
-#define debug(...) std::cerr << __LINE__ << ": [", _DEBUG_UTIL_::printer(#__VA_ARGS__, __VA_ARGS__)
-#define debugArr(arr, n) std::cerr << __LINE__ << ": [", _DEBUG_UTIL_::printerArr(#arr, arr, n)
+#define debug(...) std::cerr << __LINE__ << ": [", __DEBUG_UTIL__::printer(#__VA_ARGS__, __VA_ARGS__)
+#define debugArr(arr, n) std::cerr << __LINE__ << ": [", __DEBUG_UTIL__::printerArr(#arr, arr, n)
 #else
 #define debug(...)
 #define debugArr(arr, n)

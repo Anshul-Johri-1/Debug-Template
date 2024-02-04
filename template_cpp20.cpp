@@ -2,7 +2,6 @@
 #define DEBUG_TEMPLATE_CPP
 #include <bits/stdc++.h>
 // #define cerr cout
-using namespace std;
 namespace __DEBUG_UTIL__
 {
     using namespace std;
