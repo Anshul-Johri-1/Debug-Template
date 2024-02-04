@@ -169,7 +169,7 @@ namespace __DEBUG_UTIL__
         for (size_t i = 0; i < N; i++)
             cerr << (i ? "," : ""), print(arr[i]);
         cerr << "}";
-        std::cerr << "]\n";
+        cerr << "]\n";
     }
 }
 #ifndef ONLINE_JUDGE

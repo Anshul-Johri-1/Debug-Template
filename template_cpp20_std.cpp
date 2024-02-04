@@ -81,7 +81,7 @@ namespace __DEBUG_UTIL__
         if constexpr (sizeof...(tail))
             cerr << " ||", printer(names + i + 1, tail...);
         else
-            std::cerr << "]\n";
+            cerr << "]\n";
     }
     template <typename T>
     void printerArr(const char *name, T arr[], size_t N)
@@ -90,7 +90,7 @@ namespace __DEBUG_UTIL__
         for (size_t i = 0; i < N; i++)
             cerr << (i ? "," : ""), print(arr[i]);
         cerr << "}";
-        std::cerr << "]\n";
+        cerr << "]\n";
     }
 
 }
