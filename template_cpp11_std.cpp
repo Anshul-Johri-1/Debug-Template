@@ -33,8 +33,12 @@ namespace __DEBUG_UTIL__
     void print(T (&mat)[N][M]);
     template <typename F, typename S>
     void print(pair<F, S> x);
-    template <typename... T>
-    void print(tuple<T...> x);
+    template <typename T, size_t N>
+    struct Tuple;
+    template <typename T>
+    struct Tuple<T, 1>;
+    template <typename... Args>
+    void print(tuple<Args...> t);
     template <typename... T>
     void print(priority_queue<T...> pq);
     template <typename... T>
@@ -84,15 +88,26 @@ namespace __DEBUG_UTIL__
         print(x.second);
         cerr << ')';
     }
-    template <typename... T>
-    void print(tuple<T...> x)
+    template <typename T, size_t N>
+    struct Tuple
     {
-        int f = 0;
-        cerr << '(';
-        apply([&f](auto... args)
-              { ((cerr << (f++ ? "," : ""), print(args)), ...); },
-              x);
-        cerr << ')';
+        static void printTuple(T t)
+        {
+            Tuple<T, N - 1>::printTuple(t);
+            cerr << ",", print(get<N - 1>(t));
+        }
+    };
+    template <typename T>
+    struct Tuple<T, 1>
+    {
+        static void printTuple(T t) { print(get<0>(t)); }
+    };
+    template <typename... Args>
+    void print(tuple<Args...> t)
+    {
+        cerr << "(";
+        Tuple<decltype(t), sizeof...(Args)>::printTuple(t);
+        cerr << ")";
     }
     template <typename... T>
     void print(priority_queue<T...> pq)
