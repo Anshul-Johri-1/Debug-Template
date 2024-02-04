@@ -1,7 +1,7 @@
 # Ultimate C++ Debug Template
 Frustrated with keeping track of variables in different functions? Say goodbye to the hassle with our easy-to-use template! <br> It's designed to handle all data types, making it simple to see variable statuses throughout your program.
 
-## Usage 
+## Simple Usage 
 ```c++
 vector<int> v;
 for (int i = 1; i <= 3; i++)
@@ -50,7 +50,8 @@ debug(Char, arr, Bitset, map_String_Int);
 ```
 In instances where arrays / matrices have decayed into pointers, use `debugArr(arr, n);`
 
-#### Note:
+**Note:**
+
 
 - You don't need to remove `debug(var, ...)` statements in your code when submitting it. <br>
 - On platforms like Codeforces, there's a macro called `ONLINE_JUDGE` that's defined, automatically disregarding all your debug statements. This ensures your solution will be accepted unless there's a logical error. <br>
