@@ -3,25 +3,34 @@ Frustrated with keeping track of variables in different functions? Say goodbye t
 
 ## Simple Usage 
 ```c++
+int mat[3][5]{};
 vector<int> v;
 for (int i = 1; i <= 3; i++)
 {
-    v.push_back(i*i);
+    v.push_back(i * i);
     debug(i, v);
 }
+debug(mat);
 
-// Output :
+// stderr
 23: [i = 1 || v = {1}]
 23: [i = 2 || v = {1,4}]
 23: [i = 3 || v = {1,4,9}]
+25: [mat = 
+~~~~~
+0 {0,0,0,0,0}
+1 {0,0,0,0,0}
+2 {0,0,0,0,0}
+~~~~~
+]
 ```
 This template supports datatypes such as:
 
 - Primitive: `int`, `char`, `bool`, `long long int` etc.
-- STL: `pair`, `tuple`, `vector`, `set`, `map`, `stack`, `queue`, `priority_queue`, `bitset` etc.
+- STL: `pair`, `tuple`, `vector`, `set`, `oset`, `map`, `omap`,`stack`, `queue`, `priority_queue`, `bitset` etc.
 - Arrays of all datatypes: `int arr[]`, `bool arr[]`, `vector<int> adj[]` etc.
-- Matrix: `int mat[100][200]`, `vector<vector<bool>> vis(100, vector<bool> (200, 0))` etc.
-- Decayed Arrays / Matrices.
+- Matrix: `int dp[100][200]`, `vector<vector<bool>> vis(100, vector<bool> (200, 0))` etc.
+- Arrays that have been decayed or declared at runtime `int arr[n]`.
 - Rvalue Literals like `"Hello"`, `false`, `'z'`, `isSafe(i, j), dfs(u)` etc.  
 - Even complicated nested datatypes like: `map<string, vector<pair<char, unordered_set<long long>>>> WHATTT;` etc.
 
@@ -48,16 +57,14 @@ debug(Char, arr, Bitset, map_String_Int);
 // Output
 21: [Char = 'A' || arr = {1,2,3,4} || Bitset = 01100100 || map_String_Int = {("apple",5),("banana",3),("orange",7)}]
 ```
-In instances where arrays / matrices have decayed into pointers, use `debugArr(arr, n);`
+In instances where array have decayed into pointer, or you declared array at runtime, use `debugArr(arr, n)`;
 
 **Note:**
 
 
 - You don't need to remove `debug(var, ...)` statements in your code when submitting it. <br>
-- On platforms like Codeforces, there's a macro called `ONLINE_JUDGE` that's defined, automatically disregarding all your debug statements. This ensures your solution will be accepted unless there's a logical error. <br>
-- However, on platforms like LeetCode, `ONLINE_JUDGE` isn't defined. As a result, your solution might exceed the time limit even if it's correct, as these statements still consume time to print. To address this, simply change `#ifndef` to `#ifdef` before submitting, and your solution will be accepted. <br>
-- Also, LeetCode supports `cout` instead of `cerr`, so you need to uncomment first line i.e. `#define cerr cout` to get output there.  
-
+- On platforms like Codeforces, there's a macro called `ONLINE_JUDGE` that's defined, automatically disregarding all your debug statements. This ensures your solution will be accepted unless there's a logical error.
+  
 ## How to Setup?
 
 - Copy this template into your own templates. The output will be directed to the stderr stream.
@@ -78,7 +85,7 @@ In instances where arrays / matrices have decayed into pointers, use `debugArr(a
   
   1. Open VS Code
   2. In your workspace, create a file _template.cpp_
-  3. Copy content of my _template.cpp_ into your _template.cpp_
+  3. Copy content of one of my _template.cpp_ into your _template.cpp_
   4. Press **Ctrl + Shift + P** to open Command Pallete
   5. Search **Configure User Snippet** and click on _cpp.json_
   6. Now copy the content of my _cpp.json_ into your _cpp.json_ file
@@ -96,4 +103,5 @@ In instances where arrays / matrices have decayed into pointers, use `debugArr(a
 
 <br>
 
-If you feel like template is too long, you can change it to one liner too. If you use _format on save_ , you can take advantage of `/* clang-format off */` to keep it one line.
+If you feel like this template is too long, you change it to one liner too.
+If you use format on save , you can take advantage of `/* clang-format off */` to keep force it in one line.
