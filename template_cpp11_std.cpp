@@ -6,7 +6,7 @@ namespace __DEBUG_UTIL__
 {
     using namespace std;
     /* Primitive Datatypes Print */
-    void print(const char *x) {}
+    void print(const char *x) { cerr << x; }
     void print(bool x) { cerr << (x ? "T" : "F"); }
     void print(_Bit_reference x) { cerr << (x ? "T" : "F"); }
     void print(char x) { cerr << '\'' << x << '\''; }
