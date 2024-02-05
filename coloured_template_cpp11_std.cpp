@@ -1,20 +1,20 @@
 #ifndef DEBUG_TEMPLATE_CPP
 #define DEBUG_TEMPLATE_CPP
 #include <bits/stdc++.h>
-using namespace std;
-/* Uncomment following line to see Debug code on leetcode */
 // #define cerr cout
-namespace _DEBUG_UTIL_
+namespace __DEBUG_UTIL__
 {
+    using namespace std;
     bool I_want_colored_output = true; /* ONLY WORKS WITH TERMINAL */
     string white = I_want_colored_output ? "\033[0;m" : "";
     string outer = I_want_colored_output ? "\033[0;31m" : "";    // red
     string varName = I_want_colored_output ? "\033[1;34m" : "";  // blue
     string varValue = I_want_colored_output ? "\033[1;32m" : ""; // green
-    using namespace std;
+
     /* Primitive Datatypes Print */
-    void print(const char *x) {}
+    void print(const char *x) { cerr << x; }
     void print(bool x) { cerr << (x ? "T" : "F"); }
+    void print(_Bit_reference x) { cerr << (x ? "T" : "F"); }
     void print(char x) { cerr << '\'' << x << '\''; }
     void print(signed short int x) { cerr << x; }
     void print(unsigned short int x) { cerr << x; }
@@ -30,97 +30,90 @@ namespace _DEBUG_UTIL_
     void print(string x) { cerr << '\"' << x << '\"'; }
     template <size_t N>
     void print(bitset<N> x) { cerr << x; }
-    void print(vector<bool> x)
-    {
-        /* vector<bool> doesn't work in general iteration template because of rvalue problems */
-        int f = 0;
-        cerr << '{';
-        for (bool i : x)
-        {
-            cerr << (f++ ? "," : "");
-            cerr << (i ? "T" : "F");
-        }
-        cerr << "}";
-    }
     /* Templates Declarations to support nested datatypes */
     template <typename T>
-    void print(T x);
-    template <typename... T>
-    void print(vector<vector<T...>> mat);
-    template <typename T, size_t N>
-    void print(T (&arr)[N]);
+    void print(T &&x);
+    template <typename T>
+    void print(vector<vector<T>> mat);
     template <typename T, size_t N, size_t M>
     void print(T (&mat)[N][M]);
     template <typename F, typename S>
     void print(pair<F, S> x);
-    template <typename... T>
-    void print(tuple<T...> x);
+    template <typename T, size_t N>
+    struct Tuple;
+    template <typename T>
+    struct Tuple<T, 1>;
+    template <typename... Args>
+    void print(tuple<Args...> t);
     template <typename... T>
     void print(priority_queue<T...> pq);
-    template <typename... T>
-    void print(stack<T...> st);
-    template <typename... T>
-    void print(queue<T...> q);
+    template <typename T>
+    void print(stack<T> st);
+    template <typename T>
+    void print(queue<T> q);
     /* Template Datatypes Definitions */
     template <typename T>
-    void print(T x)
+    void print(T &&x)
     {
-        /* This works for every container that supports range-based loop i.e. vector, set, map, dequeue */
+        /*  This works for every container that supports range-based loop
+            i.e. vector, set, map, oset, omap, dequeue */
         int f = 0;
         cerr << '{';
-        for (auto i : x)
+        for (auto &&i : x)
             cerr << (f++ ? "," : ""), print(i);
         cerr << "}";
     }
-    template <typename... T>
-    void print(vector<vector<T...>> mat)
+    template <typename T>
+    void print(vector<vector<T>> mat)
     {
-        /* Specialized for 2D to format every 1D in new line */
         int f = 0;
-        cerr << "{\n";
-        for (auto i : mat)
-            cerr << (f++ ? ",\n" : ""), print(i);
-        cerr << "}\n";
-    }
-    template <typename T, size_t N>
-    void print(T (&arr)[N])
-    {
-        /* Helps in iterating through arrays and prevent decays */
-        int f = 0;
-        cerr << '{';
-        for (auto &i : arr)
-            cerr << (f++ ? "," : ""), print(i);
-        cerr << "}";
+        cerr << "\n~~~~~\n";
+        for (auto &&i : mat)
+        {
+            cerr << setw(2) << left << f++, print(i), cerr << "\n";
+        }
+        cerr << "~~~~~\n";
     }
     template <typename T, size_t N, size_t M>
     void print(T (&mat)[N][M])
     {
-        /* Helps in iterating through 2D arrays and prevent decays and also print arrays in new line */
         int f = 0;
-        cerr << "{\n";
-        for (auto &i : mat)
-            cerr << (f++ ? ",\n" : ""), print(i);
-        cerr << "}\n";
+        cerr << "\n~~~~~\n";
+        for (auto &&i : mat)
+        {
+            cerr << setw(2) << left << f++, print(i), cerr << "\n";
+        }
+        cerr << "~~~~~\n";
     }
     template <typename F, typename S>
     void print(pair<F, S> x)
     {
-        /* Works for pairs and iterating through maps */
         cerr << '(';
         print(x.first);
         cerr << ',';
         print(x.second);
         cerr << ')';
     }
-    template <typename... T>
-    void print(tuple<T...> x)
+    template <typename T, size_t N>
+    struct Tuple
     {
-        int f = 0;
-        cerr << '(';
-        apply([&f](auto... args)
-              { ((cerr << (f++ ? "," : ""), print(args)), ...); },
-              x);
-        cerr << ')';
+        static void printTuple(T t)
+        {
+            Tuple<T, N - 1>::printTuple(t);
+            cerr << ",", print(get<N - 1>(t));
+        }
+    };
+    template <typename T>
+    struct Tuple<T, 1>
+    {
+        static void printTuple(T t) { print(get<0>(t)); }
+    };
+    template <typename... Args>
+    void print(tuple<Args...> t)
+    {
+        cerr << "(";
+        Tuple<decltype(t), sizeof...(Args)>::printTuple(t);
+        cerr << ")";
     }
     template <typename... T>
     void print(priority_queue<T...> pq)
@@ -131,8 +124,8 @@ namespace _DEBUG_UTIL_
             cerr << (f++ ? "," : ""), print(pq.top()), pq.pop();
         cerr << "}";
     }
-    template <typename... T>
-    void print(stack<T...> st)
+    template <typename T>
+    void print(stack<T> st)
     {
         int f = 0;
         cerr << '{';
@@ -140,8 +133,8 @@ namespace _DEBUG_UTIL_
             cerr << (f++ ? "," : ""), print(st.top()), st.pop();
         cerr << "}";
     }
-    template <typename... T>
-    void print(queue<T...> q)
+    template <typename T>
+    void print(queue<T> q)
     {
         int f = 0;
         cerr << '{';
@@ -149,70 +142,50 @@ namespace _DEBUG_UTIL_
             cerr << (f++ ? "," : ""), print(q.front()), q.pop();
         cerr << "}";
     }
-    /* Printer functions responsible for.... printing beautifully ? */
-
+    /* Printer functions */
     template <typename T>
     void printer(const char *name, T &&head)
     {
-        /* Base conditions for printer */
-        cerr << varName;
-        cerr << name;
-        cerr << outer;
-        cerr << " = ";
-        cerr << varValue;
+        /* Base condition */
+
+        cerr << varName << name << outer << " = " << varValue;
         print(head);
-        cerr << outer;
-        cerr << "]\n";
-        cerr << white;
+        cerr << outer << "]\n"
+             << white;
     }
     template <typename T, typename... V>
     void printer(const char *names, T &&head, V &&...tail)
     {
         /* Using && to capture both lvalues and rvalues */
-        int bracket = 0, i = 0;
-        while (names[i] != ',' or bracket != 0)
-        {
+        int i = 0;
+        for (size_t bracket = 0; names[i] != '\0' and (names[i] != ',' or bracket != 0); i++)
             if (names[i] == '(' or names[i] == '<' or names[i] == '{')
                 bracket++;
             else if (names[i] == ')' or names[i] == '>' or names[i] == '}')
                 bracket--;
-            i++;
-        }
         cerr << varName;
-        cerr.write(names, i);
-        cerr << outer;
-        cerr << " = ";
-        cerr << varValue;
+        cerr.write(names, i) << outer << " = " << varValue;
         print(head);
-        cerr << outer;
-        cerr << " ||";
+        cerr << outer << " ||";
         printer(names + i + 1, tail...);
     }
     /* PrinterArr */
     template <typename T>
     void printerArr(const char *name, T arr[], int N)
     {
-        cerr << varName;
-        cerr << name;
-        cerr << outer;
-        cerr << " = ";
-        cerr << varValue;
-        cerr << " {";
-        for (int i = 0; i < N; i++)
-        {
+        /* Printing decayed and runtime arrays */
+        cerr << varName << name << outer << " = " << varValue
+             << "{";
+        for (size_t i = 0; i < N; i++)
             cerr << (i ? "," : ""), print(arr[i]);
-        }
         cerr << "}";
-        cerr << outer;
-        cerr << "]\n";
-        cerr << white;
+        cerr << outer << "]\n"
+             << white;
     }
 }
-
-/* Before submitting on LeetCode (Not CodeForces), change #ifndef to #ifdef */
 #ifndef ONLINE_JUDGE
-#define debug(...) std::cerr << _DEBUG_UTIL_::outer << __LINE__ << ": [", _DEBUG_UTIL_::printer(#__VA_ARGS__, __VA_ARGS__)
-#define debugArr(arr, n) std::cerr << _DEBUG_UTIL_::outer << __LINE__ << ": [", _DEBUG_UTIL_::printerArr(#arr, arr, n)
+#define debug(...) std::cerr << __DEBUG_UTIL__::outer << __LINE__ << ": [", __DEBUG_UTIL__::printer(#__VA_ARGS__, __VA_ARGS__)
+#define debugArr(arr, n) std::cerr << __DEBUG_UTIL__::outer << __LINE__ << ": [", __DEBUG_UTIL__::printerArr(#arr, arr, n)
 #else
 #define debug(...)
 #define debugArr(arr, n)
