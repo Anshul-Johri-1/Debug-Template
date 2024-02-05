@@ -1,8 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define debug(...)
-#define debugArr(arr, n)
+#include "template_cpp20_std.cpp"
 
 signed main()
 {
