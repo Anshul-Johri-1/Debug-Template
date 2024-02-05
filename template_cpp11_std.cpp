@@ -27,8 +27,8 @@ namespace __DEBUG_UTIL__
     /* Templates Declarations to support nested datatypes */
     template <typename T>
     void print(T &&x);
-    template <typename... T>
-    void print(vector<vector<T...>> &&mat);
+    template <typename T>
+    void print(vector<vector<T>> mat);
     template <typename T, size_t N, size_t M>
     void print(T (&mat)[N][M]);
     template <typename F, typename S>
@@ -41,10 +41,10 @@ namespace __DEBUG_UTIL__
     void print(tuple<Args...> t);
     template <typename... T>
     void print(priority_queue<T...> pq);
-    template <typename... T>
-    void print(stack<T...> st);
-    template <typename... T>
-    void print(queue<T...> q);
+    template <typename T>
+    void print(stack<T> st);
+    template <typename T>
+    void print(queue<T> q);
     /* Template Datatypes Definitions */
     template <typename T>
     void print(T &&x)
@@ -57,8 +57,8 @@ namespace __DEBUG_UTIL__
             cerr << (f++ ? "," : ""), print(i);
         cerr << "}";
     }
-    template <typename... T>
-    void print(vector<vector<T...>> &&mat)
+    template <typename T>
+    void print(vector<vector<T>> mat)
     {
         int f = 0;
         cerr << "\n~~~~~\n";
@@ -118,8 +118,8 @@ namespace __DEBUG_UTIL__
             cerr << (f++ ? "," : ""), print(pq.top()), pq.pop();
         cerr << "}";
     }
-    template <typename... T>
-    void print(stack<T...> st)
+    template <typename T>
+    void print(stack<T> st)
     {
         int f = 0;
         cerr << '{';
@@ -127,8 +127,8 @@ namespace __DEBUG_UTIL__
             cerr << (f++ ? "," : ""), print(st.top()), st.pop();
         cerr << "}";
     }
-    template <typename... T>
-    void print(queue<T...> q)
+    template <typename T>
+    void print(queue<T> q)
     {
         int f = 0;
         cerr << '{';

@@ -6,99 +6,158 @@ using namespace std;
 
 signed main()
 {
-    /* Primitive */
-    int int_ = 10;
-    long long longlong_ = 10;
-    double double_ = 3.14;
-    char char_ = 'A';
-    bool bool_ = true;
+    // Primitives
+    int intVar = 42;
+    double doubleVar = 3.14;
+    char charVar = 'A';
+    bool boolVar = true;
+    float floatVar = 2.718f;
+    long long longVar = 1234567890;
+    short shortVar = 32767;
+    unsigned int uintVar = 4294967295;
+    unsigned long ulongVar = 1844674ull;
+    unsigned short ushortVar = 65535;
+    long long longlongVar = 9223372036854775807ll;
+    unsigned long long ulonglongVar = 18446744073709551615ull;
 
-    /* STL */
-    string string_ = "Hello World!";
-    bitset<8> bitset_(100);
-    pair<int, string> pair_int_string{1, "CodeForces"};
-    tuple<char, int, string> tuple_{'X', 5, "Hello"};
-    vector<int> vectorInt = {1, 2, 3, 4, 5};
-    set<int> setInt{1, 2, 3, 4};
-    map<string, int> map_String_Int = {{"apple", 5}, {"banana", 3}, {"orange", 7}};
-    stack<int> st;
-    queue<int> q;
-    priority_queue<int> pq;
-    priority_queue<int, vector<int>, greater<int>> pq2;
-    deque<int> dq;
+    debug(intVar);
+    debug(doubleVar);
+    debug(charVar);
+    debug(boolVar);
+    debug(floatVar);
+    debug(longVar);
+    debug(shortVar);
+    debug(uintVar);
+    debug(ulongVar);
+    debug(ushortVar);
+    debug(longlongVar);
+    debug(ulonglongVar);
 
-    /* Arrays */
-    int arrInt[] = {1, 2, 3, 4};
-    bool arrBool[]{true, true, false, false, true};
-    vector<int> arrVector[] = {{1, 2, 3}, {4, 5, 6}};
+    // STLs
+    std::string strVar = "Hello, Debug!";
+    std::vector<int> vecVar = {1, 2, 3, 4, 5};
+    std::array<double, 5> arrVar = {1.1, 2.2, 3.3, 4.4, 5.5};
+    std::list<char> lstVar = {'a', 'b', 'c', 'd', 'e'};
+    std::set<int> setVar = {1, 2, 3, 4, 5};
+    std::map<int, std::string> mapVar = {{1, "one"}, {2, "two"}, {3, "three"}};
+    std::deque<float> dequeVar = {1.1f, 2.2f, 3.3f, 4.4f, 5.5f};
+    std::unordered_set<int> unorderedSetVar = {1, 2, 3, 4, 5};
+    std::unordered_map<int, std::string> unorderedMapVar = {{1, "one"}, {2, "two"}, {3, "three"}};
+    std::bitset<8> bitsetVar("10101010");
+    std::pair<int, double> pairVar = {42, 3.14};
+    std::tuple<int, double, std::string> tupleVar = {42, 3.14, "tuple"};
+    std::queue<int> queueVar;
+    std::priority_queue<int> priorityQueueVar;
+    std::stack<int> stackVar;
+    for (int i = 1; i <= 5; ++i)
+        queueVar.push(i), priorityQueueVar.push(i), stackVar.push(i);
 
-    /* Matrix */
-    int matInt[][4] = {{1, 2, 3, 4}, {1, 2, 3, 4}, {1, 2, 3, 4}};
-    bool matBool[][5]{{1, 1, 0, 0, 1}, {1, 1, 0, 0, 1}, {1, 1, 0, 0, 1}, {1, 1, 0, 0, 1}};
-    vector<vector<int>> vectorVectorInt = {{1, 2, 3, 4, 5}, {10, 20, 30}};
-    vector<vector<bool>> vectorVectorBool{{1, 1, 0, 0, 1}, {1, 1, 0, 0, 1}, {1, 1, 0, 0, 1}, {1, 1, 0, 0, 1}};
+    debug(strVar);
+    debug(vecVar);
+    debug(arrVar);
+    debug(lstVar);
+    debug(setVar);
+    debug(mapVar);
+    debug(dequeVar);
+    debug(unorderedSetVar);
+    debug(unorderedMapVar);
+    debug(bitsetVar);
+    debug(pairVar);
+    debug(tupleVar);
+    debug(queueVar);
+    debug(priorityQueueVar);
+    debug(stackVar);
 
-    /* Decayed Arrays */
-    int n = 5;
-    int arrTemp[n]{1, 2, 3, 4};
-    int *decayArr = arrTemp;
+    // 2D Vectors
+    std::vector<std::vector<int>> vecVecVar = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}};
+    std::vector<std::vector<bool>> boolVecVecVar = {
+        {true, false, true},
+        {false, true, false},
+        {true, true, false}};
+    std::vector<std::vector<std::pair<int, char>>> pairVecVecVar = {
+        {{1, 'a'}, {2, 'b'}, {3, 'c'}},
+        {{4, 'd'}, {5, 'e'}, {6, 'f'}},
+        {{7, 'g'}, {8, 'h'}, {9, 'i'}}};
 
-    /* Nested */
-    vector<bitset<8>> vectorBitVar{bitset<8>(213), bitset<8>(535)};
-    vector<string> vectorString{"CodeForces", "LeetCode"};
-    map<string, vector<unordered_map<int, char>>> nested1;
+    debug(vecVecVar);
+    debug(boolVecVecVar);
+    debug(pairVecVecVar);
 
-    /* Rvalue */
-    auto fun = []()
-    { return true; };
+    // Vector of STLs
+    std::vector<std::deque<char>> vecDequeVar = {{'a', 'b', 'c'}, {'d', 'e', 'f'}, {'g', 'h', 'i'}};
+    std::vector<std::list<int>> vecListVar = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+    std::vector<std::set<char>> vecSetVar = {{'a', 'b', 'c'}, {'d', 'e', 'f'}, {'g', 'h', 'i'}};
+    std::vector<std::map<int, std::string>> vecMapVar = {{{1, "one"}, {2, "two"}}, {{3, "three"}, {4, "four"}}};
+    std::vector<std::bitset<8>> vecBitsetVar = {std::bitset<8>("10101010"), std::bitset<8>("11001100"), std::bitset<8>("11110000")};
 
-    /******************************************/
+    debug(vecDequeVar);
+    debug(vecListVar);
+    debug(vecSetVar);
+    debug(vecMapVar);
+    debug(vecBitsetVar);
 
-    /* Primitive */
-    debug(int_);
-    debug(longlong_);
-    debug(double_);
-    debug(char_);
-    debug(bool_);
+    // Array of Primitives
+    int intArr[5] = {1, 2, 3, 4, 5};
+    double doubleArr[3] = {1.1, 2.2, 3.3};
+    char charArr[5] = {'a', 'b', 'c', 'd', 'e'};
+    bool boolArr[4] = {true, false, true, false};
+    float floatArr[4] = {1.1f, 2.2f, 3.3f, 4.4f};
 
-    debug(int_, longlong_, double_, char_, bool_);
+    debug(intArr);
+    debug(doubleArr);
+    debug(charArr);
+    debug(boolArr);
+    debug(floatArr);
 
-    /* STL */
-    debug(string_);
-    debug(bitset_);
-    debug(pair_int_string);
-    debug(tuple_);
-    debug(vectorInt);
-    debug(setInt);
-    debug(map_String_Int);
-    debug(st);
-    debug(q);
-    debug(pq);
-    debug(pq2);
-    debug(dq);
+    // 2D Arrays
+    int arrArr[3][3] = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}};
+    bool boolArrArr[3][3] = {
+        {true, false, true},
+        {false, true, false},
+        {true, true, false}};
 
-    debug(string_, bitset_, pair_int_string, tuple_, vectorInt, setInt, map_String_Int, st, q, pq, pq2, dq);
+    std::pair<int, char> pairArrArr[3][3] = {
+        {{1, 'a'}, {2, 'b'}, {3, 'c'}},
+        {{4, 'd'}, {5, 'e'}, {6, 'f'}},
+        {{7, 'g'}, {8, 'h'}, {9, 'i'}}};
 
-    /* Arrays */
-    debug(arrInt);
-    debug(arrBool);
-    debug(arrVector);
+    debug(arrArr);
+    debug(boolArrArr);
+    debug(pairArrArr);
 
-    debug(arrInt, arrBool, arrVector);
+    // Array of STLs
+    std::vector<int> vec1 = {1, 2, 3};
+    std::vector<int> vec2 = {4, 5, 6};
+    std::vector<int> vec3 = {7, 8, 9};
+    std::vector<int> vecArr[3] = {vec1, vec2, vec3};
 
-    /* Matrices */
-    debug(matInt, matBool, vectorVectorInt, vectorVectorBool);
+    std::set<char> set1 = {'a', 'b', 'c'};
+    std::set<char> set2 = {'d', 'e', 'f'};
+    std::set<char> set3 = {'g', 'h', 'i'};
+    std::set<char> setArr[3] = {set1, set2, set3};
 
-    /* Decayed Array */
-    debugArr(decayArr, n);
+    std::map<int, std::string> map1 = {{1, "one"}, {2, "two"}, {3, "three"}};
+    std::map<int, std::string> map2 = {{4, "four"}, {5, "five"}, {6, "six"}};
+    std::map<int, std::string> map3 = {{7, "seven"}, {8, "eight"}, {9, "nine"}};
+    std::map<int, std::string> mapArr[3] = {map1, map2, map3};
 
-    /* Nested */
-    debug(vectorBitVar);
-    debug(vectorString);
-    debug(nested1);
+    debug(vecArr);
+    debug(setArr);
+    debug(mapArr);
 
-    debug(vectorBitVar, vectorString, nested1);
+    // Arrays declared at runtime, is as good as decayed arrays
+    int N = 10;
+    int arrRuntime[N] = {1, 2, 3, 4, 5};
+    bool boolArrRuntime[N] = {true, false, true, false, true};
+    std::pair<int, char> pairArrRuntime[N] = {{1, 'A'}, {2, 'B'}, {3, 'C'}, {4, 'D'}, {5, 'E'}};
 
-    /* Rvalue */
-    debug(fun());
+    debugArr(arrRuntime, N);
+    debugArr(boolArrRuntime, N);
+    debugArr(pairArrRuntime, N);
 }
