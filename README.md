@@ -31,7 +31,8 @@ This template supports datatypes such as:
 - Arrays of all datatypes: `int arr[]`, `bool arr[]`, `vector<int> adj[]` etc.
 - Matrix: `int dp[100][200]`, `vector<vector<bool>> vis(100, vector<bool> (200, 0))` etc.
 - Arrays that have been decayed or declared at runtime `int arr[n]`.
-- Rvalue Literals like `"Hello"`, `false`, `'z'`, `isSafe(i, j), dfs(u)` etc.  
+- Rvalue Literals like `"Hello"`, `false`, `'z'`, `isSafe(i, j), dfs(u)` etc. 
+- User defined structs / classes like `Point`, `Node`. 
 - Even complicated nested datatypes like: `map<string, vector<pair<char, unordered_set<long long>>>> WHATTT;` etc.
 
 Coloured version of this template is also supported. (Terminal Only)
@@ -57,6 +58,11 @@ debug(Char, arr, Bitset, map_String_Int);
 // Output
 21: [Char = 'A' || arr = {1,2,3,4} || Bitset = 01100100 || map_String_Int = {("apple",5),("banana",3),("orange",7)}]
 ```
+If you have user defined structs / classes, you just need to make a `print()` function, and use `debug(...)` like you do :)
+```c++
+void print(Point ob) { cerr << "(" << ob.x << "," << ob.y << ")"; }
+```
+
 In instances where array have decayed into pointer, or you declared array at runtime, use `debugArr(arr, n)`;
 
 **Note:**
