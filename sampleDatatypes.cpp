@@ -151,7 +151,7 @@ signed main()
     debug(mapArr);
 
     // Arrays declared at runtime, is as good as decayed arrays
-    int N = 10;
+    int N = 5;
     int arrRuntime[N] = {1, 2, 3, 4, 5};
     bool boolArrRuntime[N] = {true, false, true, false, true};
     std::pair<int, char> pairArrRuntime[N] = {{1, 'A'}, {2, 'B'}, {3, 'C'}, {4, 'D'}, {5, 'E'}};

@@ -162,7 +162,7 @@ namespace __DEBUG_UTIL__
     }
     /* PrinterArr */
     template <typename T>
-    void printerArr(const char *name, T arr[], int N)
+    void printerArr(const char *name, T arr[], size_t N)
     {
         /* Printing decayed and runtime arrays */
         cerr << name << " = {";

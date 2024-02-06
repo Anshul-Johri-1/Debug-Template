@@ -39,12 +39,12 @@ namespace __DEBUG_UTIL__
                 }
             else
                 cerr << "{}";
-        else if constexpr (requires(T &&x) { x.pop(); }) /* Stacks, Priority Queues, Queues */
+        else if constexpr (requires { x.pop(); }) /* Stacks, Priority Queues, Queues */
         {
             T temp = x;
             int f = 0;
             cerr << "{";
-            if constexpr (requires(T &&x) { x.top(); })
+            if constexpr (requires { x.top(); })
                 while (!temp.empty())
                     cerr << (f++ ? "," : ""), print(temp.top()), temp.pop();
             else
@@ -52,11 +52,11 @@ namespace __DEBUG_UTIL__
                     cerr << (f++ ? "," : ""), print(temp.front()), temp.pop();
             cerr << "}";
         }
-        else if constexpr (requires(T &&x) { x.first; x.second; }) /* Pair */
+        else if constexpr (requires { x.first; x.second; }) /* Pair */
         {
             cerr << '(', print(x.first), cerr << ',', print(x.second), cerr << ')';
         }
-        else if constexpr (requires(T &&x) { get<0>(x); }) /* Tuple */
+        else if constexpr (requires { get<0>(x); }) /* Tuple */
         {
             int f = 0;
             cerr << '(', apply([&f](auto... args)
