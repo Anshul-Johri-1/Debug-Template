@@ -145,14 +145,7 @@ namespace __DEBUG_UTIL__
         cerr << "}";
     }
     /* Printer functions */
-    template <typename T>
-    void printer(const char *name, T &&head)
-    {
-        /* Base condition */
-        cerr << name << " = ";
-        print(head);
-        cerr << "]\n";
-    }
+    void printer(const char *) {} /* Base Recursive */
     template <typename T, typename... V>
     void printer(const char *names, T &&head, V &&...tail)
     {
@@ -165,26 +158,36 @@ namespace __DEBUG_UTIL__
                 bracket--;
         cerr.write(names, i) << " = ";
         print(head);
-        cerr << " ||";
-        printer(names + i + 1, tail...);
+        if (sizeof...(tail))
+            cerr << " ||", printer(names + i + 1, tail...);
+        else
+            cerr << "]\n";
     }
     /* PrinterArr */
-    template <typename T>
-    void printerArr(const char *name, T arr[], size_t N)
+    void printerArr(const char *) {} /* Base Recursive */
+    template <typename T, typename... V>
+    void printerArr(const char *names, T arr[], size_t N, V... tail)
     {
-        /* Printing decayed and runtime arrays */
-        cerr << name << " = {";
+        size_t ind = 0;
+        for (; names[ind] and names[ind] != ','; ind++)
+            cerr << names[ind];
+        for (ind++; names[ind] and names[ind] != ','; ind++)
+            ;
+        cerr << " = {";
         for (size_t i = 0; i < N; i++)
             cerr << (i ? "," : ""), print(arr[i]);
         cerr << "}";
-        cerr << "]\n";
+        if (sizeof...(tail))
+            cerr << " ||", printerArr(names + ind + 1, tail...);
+        else
+            cerr << "]\n";
     }
 }
 #ifndef ONLINE_JUDGE
 #define debug(...) std::cerr << __LINE__ << ": [", __DEBUG_UTIL__::printer(#__VA_ARGS__, __VA_ARGS__)
-#define debugArr(arr, n) std::cerr << __LINE__ << ": [", __DEBUG_UTIL__::printerArr(#arr, arr, n)
+#define debugArr(...) std::cerr << __LINE__ << ": [", __DEBUG_UTIL__::printerArr(#__VA_ARGS__, __VA_ARGS__)
 #else
 #define debug(...)
-#define debugArr(arr, n)
+#define debugArr(...)
 #endif
 #endif

@@ -31,6 +31,7 @@ signed main()
     debug(ushortVar);
     debug(longlongVar);
     debug(ulonglongVar);
+    debug(intVar, doubleVar, charVar, boolVar, floatVar, longVar, shortVar, uintVar, ulongVar, ushortVar, longlongVar, ulonglongVar);
 
     // STLs
     std::string strVar = "Hello, Debug!";
@@ -68,6 +69,7 @@ signed main()
     debug(queueVar);
     debug(priorityQueueVar);
     debug(stackVar);
+    debug(strVar, vecVar, vecBoolVar, arrVar, lstVar, setVar, mapVar, dequeVar, unorderedSetVar, unorderedMapVar, bitsetVar, pairVar, tupleVar, queueVar, priorityQueueVar, stackVar);
 
     // 2D Vectors
     std::vector<std::vector<int>> vecVecVar = {
@@ -86,6 +88,7 @@ signed main()
     debug(vecVecVar);
     debug(boolVecVecVar);
     debug(pairVecVecVar);
+    debug(vecVecVar, boolVecVecVar, pairVecVecVar);
 
     // Vector of STLs
     std::vector<std::deque<char>> vecDequeVar = {{'a', 'b', 'c'}, {'d', 'e', 'f'}, {'g', 'h', 'i'}};
@@ -99,6 +102,7 @@ signed main()
     debug(vecSetVar);
     debug(vecMapVar);
     debug(vecBitsetVar);
+    debug(vecDequeVar, vecListVar, vecSetVar, vecMapVar, vecBitsetVar);
 
     // Array of Primitives
     int intArr[5] = {1, 2, 3, 4, 5};
@@ -112,6 +116,7 @@ signed main()
     debug(charArr);
     debug(boolArr);
     debug(floatArr);
+    debug(intArr, doubleArr, charArr, boolArr, floatArr);
 
     // 2D Arrays
     int arrArr[3][3] = {
@@ -131,6 +136,7 @@ signed main()
     debug(arrArr);
     debug(boolArrArr);
     debug(pairArrArr);
+    debug(arrArr, boolArrArr, pairArrArr);
 
     // Array of STLs
     std::vector<int> vec1 = {1, 2, 3};
@@ -151,6 +157,7 @@ signed main()
     debug(vecArr);
     debug(setArr);
     debug(mapArr);
+    debug(vecArr, setArr, mapArr);
 
     // Arrays declared at runtime, is as good as decayed arrays
     int N = 5;
@@ -161,4 +168,5 @@ signed main()
     debugArr(arrRuntime, N);
     debugArr(boolArrRuntime, N);
     debugArr(pairArrRuntime, N);
+    debugArr(arrRuntime, N, boolArrRuntime, N, pairArrRuntime, N);
 }
