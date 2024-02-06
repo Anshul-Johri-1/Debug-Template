@@ -8,7 +8,6 @@ namespace __DEBUG_UTIL__
     /* Primitive Datatypes Print */
     void print(const char *x) { cerr << x; }
     void print(bool x) { cerr << (x ? "T" : "F"); }
-    void print(_Bit_reference x) { cerr << (x ? "T" : "F"); }
     void print(char x) { cerr << '\'' << x << '\''; }
     void print(signed short int x) { cerr << x; }
     void print(unsigned short int x) { cerr << x; }
@@ -24,6 +23,15 @@ namespace __DEBUG_UTIL__
     void print(string x) { cerr << '\"' << x << '\"'; }
     template <size_t N>
     void print(bitset<N> x) { cerr << x; }
+    void print(vector<bool> v)
+    { /* Overloaded this because stl optimizes vector<bool> by using
+          _Bit_reference instead of bool to conserve space. */
+        int f = 0;
+        cerr << '{';
+        for (auto &&i : v)
+            cerr << (f++ ? "," : "") << (i ? "T" : "F");
+        cerr << "}";
+    }
     /* Templates Declarations to support nested datatypes */
     template <typename T>
     void print(T &&x);

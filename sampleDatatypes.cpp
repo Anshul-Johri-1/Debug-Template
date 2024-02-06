@@ -35,6 +35,7 @@ signed main()
     // STLs
     std::string strVar = "Hello, Debug!";
     std::vector<int> vecVar = {1, 2, 3, 4, 5};
+    std::vector<bool> vecBoolVar = {0, 1, 0, 1, 0, 1};
     std::array<double, 5> arrVar = {1.1, 2.2, 3.3, 4.4, 5.5};
     std::list<char> lstVar = {'a', 'b', 'c', 'd', 'e'};
     std::set<int> setVar = {1, 2, 3, 4, 5};
@@ -53,6 +54,7 @@ signed main()
 
     debug(strVar);
     debug(vecVar);
+    debug(vecBoolVar);
     debug(arrVar);
     debug(lstVar);
     debug(setVar);

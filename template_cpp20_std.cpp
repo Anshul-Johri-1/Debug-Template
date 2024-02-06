@@ -6,39 +6,43 @@ namespace __DEBUG_UTIL__
 {
     using namespace std;
     template <typename T>
-    concept is_iterable = requires(T &&x) { begin(x); end(x); size(x); } &&
+    concept is_iterable = requires(T &&x) { begin(x); } &&
                           !is_same_v<remove_cvref_t<T>, string>;
     void print(const char *x) { cerr << x; }
     void print(char x) { cerr << "\'" << x << "\'"; }
     void print(bool x) { cerr << (x ? "T" : "F"); }
-    void print(_Bit_reference x) { cerr << (x ? "T" : "F"); }
     void print(string x) { cerr << "\"" << x << "\""; }
-
+    void print(vector<bool> &&v)
+    { /* Overloaded this because stl optimizes vector<bool> by using
+         _Bit_reference instead of bool to conserve space. */
+        int f = 0;
+        cerr << '{';
+        for (auto &&i : v)
+            cerr << (f++ ? "," : "") << (i ? "T" : "F");
+        cerr << "}";
+    }
     template <typename T>
     void print(T &&x)
     {
-        if constexpr (is_iterable<T>) /* Every iterable Ever */
-            if (size(x))
-                if constexpr (is_iterable<decltype(*(begin(x)))>)
+        if constexpr (is_iterable<T>)
+            if (size(x) && is_iterable<decltype(*(begin(x)))>)
+            { /* Iterable inside Iterable */
+                int f = 0;
+                cerr << "\n~~~~~\n";
+                for (auto &&i : x)
                 {
-                    int f = 0;
-                    cerr << "\n~~~~~\n";
-                    for (auto &&i : x)
-                    {
-                        cerr << setw(2) << left << f++, print(i), cerr << "\n";
-                    }
-                    cerr << "~~~~~\n";
+                    cerr << setw(2) << left << f++, print(i), cerr << "\n";
                 }
-                else
-                {
-                    int f = 0;
-                    cerr << "{";
-                    for (auto &&i : x)
-                        cerr << (f++ ? "," : ""), print(i);
-                    cerr << "}";
-                }
+                cerr << "~~~~~\n";
+            }
             else
-                cerr << "{}";
+            { /* Normal Iterable */
+                int f = 0;
+                cerr << "{";
+                for (auto &&i : x)
+                    cerr << (f++ ? "," : ""), print(i);
+                cerr << "}";
+            }
         else if constexpr (requires { x.pop(); }) /* Stacks, Priority Queues, Queues */
         {
             T temp = x;
