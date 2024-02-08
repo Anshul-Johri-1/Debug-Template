@@ -45,7 +45,7 @@ namespace __DEBUG_UTIL__
             }
         else if constexpr (requires { x.pop(); }) /* Stacks, Priority Queues, Queues */
         {
-            T temp = x;
+            auto temp = x;
             int f = 0;
             cerr << "{";
             if constexpr (requires { x.top(); })
