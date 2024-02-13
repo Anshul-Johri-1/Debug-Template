@@ -29,9 +29,10 @@ namespace __DEBUG_UTIL__
             { /* Iterable inside Iterable */
                 int f = 0;
                 cerr << "\n~~~~~\n";
+                int w = max(0, (int)log10(size(x) - 1)) + 2;
                 for (auto &&i : x)
                 {
-                    cerr << setw(2) << left << f++, print(i), cerr << "\n";
+                    cerr << setw(w) << left << f++, print(i), cerr << "\n";
                 }
                 cerr << "~~~~~\n";
             }
