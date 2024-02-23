@@ -37,7 +37,7 @@ This template supports datatypes such as:
 
 Coloured version of this template is also supported. (Terminal Only)
 
-<img src="colouredTemplate.png">
+<img src="colouredTemplateDark.png">
 
 You can use it on your computer when doing coding challenges on sites like **CodeForces**. <br>
 Additionally, you can use it in online coding environments like **LeetCode** for practicing data structures and algorithms.
