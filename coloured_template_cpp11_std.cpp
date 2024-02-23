@@ -14,7 +14,6 @@ namespace __DEBUG_UTIL__
     /* Primitive Datatypes Print */
     void print(const char *x) { cerr << x; }
     void print(bool x) { cerr << (x ? "T" : "F"); }
-    void print(_Bit_reference x) { cerr << (x ? "T" : "F"); }
     void print(char x) { cerr << '\'' << x << '\''; }
     void print(signed short int x) { cerr << x; }
     void print(unsigned short int x) { cerr << x; }
@@ -30,6 +29,15 @@ namespace __DEBUG_UTIL__
     void print(string x) { cerr << '\"' << x << '\"'; }
     template <size_t N>
     void print(bitset<N> x) { cerr << x; }
+    void print(vector<bool> v)
+    { /* Overloaded this because stl optimizes vector<bool> by using
+          _Bit_reference instead of bool to conserve space. */
+        int f = 0;
+        cerr << '{';
+        for (auto &&i : v)
+            cerr << (f++ ? "," : "") << (i ? "T" : "F");
+        cerr << "}";
+    }
     /* Templates Declarations to support nested datatypes */
     template <typename T>
     void print(T &&x);
@@ -143,16 +151,7 @@ namespace __DEBUG_UTIL__
         cerr << "}";
     }
     /* Printer functions */
-    template <typename T>
-    void printer(const char *name, T &&head)
-    {
-        /* Base condition */
-
-        cerr << varName << name << outer << " = " << varValue;
-        print(head);
-        cerr << outer << "]\n"
-             << white;
-    }
+    void printer(const char *) {} /* Base Recursive */
     template <typename T, typename... V>
     void printer(const char *names, T &&head, V &&...tail)
     {
@@ -166,28 +165,39 @@ namespace __DEBUG_UTIL__
         cerr << varName;
         cerr.write(names, i) << outer << " = " << varValue;
         print(head);
-        cerr << outer << " ||";
-        printer(names + i + 1, tail...);
+        if (sizeof...(tail))
+            cerr << outer << " ||", printer(names + i + 1, tail...);
+        else
+            cerr << outer << "]\n"
+                 << white;
     }
     /* PrinterArr */
-    template <typename T>
-    void printerArr(const char *name, T arr[], int N)
+    void printerArr(const char *) {} /* Base Recursive */
+    template <typename T, typename... V>
+    void printerArr(const char *names, T arr[], size_t N, V... tail)
     {
-        /* Printing decayed and runtime arrays */
-        cerr << varName << name << outer << " = " << varValue
-             << "{";
+        size_t ind = 0;
+        cerr << varName;
+        for (; names[ind] and names[ind] != ','; ind++)
+            cerr << names[ind];
+        for (ind++; names[ind] and names[ind] != ','; ind++)
+            ;
+        cerr << outer << " = " << varValue << "{";
         for (size_t i = 0; i < N; i++)
             cerr << (i ? "," : ""), print(arr[i]);
         cerr << "}";
-        cerr << outer << "]\n"
-             << white;
+        if (sizeof...(tail))
+            cerr << outer << " ||", printerArr(names + ind + 1, tail...);
+        else
+            cerr << outer << "]\n"
+                 << white;
     }
 }
 #ifndef ONLINE_JUDGE
 #define debug(...) std::cerr << __DEBUG_UTIL__::outer << __LINE__ << ": [", __DEBUG_UTIL__::printer(#__VA_ARGS__, __VA_ARGS__)
-#define debugArr(arr, n) std::cerr << __DEBUG_UTIL__::outer << __LINE__ << ": [", __DEBUG_UTIL__::printerArr(#arr, arr, n)
+#define debugArr(...) std::cerr << __DEBUG_UTIL__::outer << __LINE__ << ": [", __DEBUG_UTIL__::printerArr(#__VA_ARGS__, __VA_ARGS__)
 #else
 #define debug(...)
-#define debugArr(arr, n)
+#define debugArr(...)
 #endif
 #endif

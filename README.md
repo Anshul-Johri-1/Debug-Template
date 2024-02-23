@@ -1,5 +1,5 @@
-# Ultimate C++ Debug Template
-Frustrated with keeping track of variables in different functions? Say goodbye to the hassle with our easy-to-use template! <br> It's designed to handle all data types, making it simple to see variable statuses throughout your program.
+# C++ Debug Template
+Simplify variable tracking across functions and loops!
 
 ## Simple Usage 
 ```c++
@@ -106,8 +106,3 @@ In instances where array have decayed into pointer, or you declared array at run
   3. When solving DSA problems in LeetCode, paste this above `class Solution` and use debug normally.
   4. Before submitting, change `#ifndef` to `#ifdef` to ignore `debug(...);`.
 </details>
-
-<br>
-
-If you feel like this template is too long, you change it to one liner too.
-If you use format on save , you can take advantage of `/* clang-format off */` to keep force it in one line.
