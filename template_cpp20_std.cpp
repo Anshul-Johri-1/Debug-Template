@@ -12,7 +12,7 @@ namespace __DEBUG_UTIL__
     void print(char x) { cerr << "\'" << x << "\'"; }
     void print(bool x) { cerr << (x ? "T" : "F"); }
     void print(string x) { cerr << "\"" << x << "\""; }
-    void print(vector<bool> &&v)
+    void print(vector<bool> &v)
     { /* Overloaded this because stl optimizes vector<bool> by using
          _Bit_reference instead of bool to conserve space. */
         int f = 0;
