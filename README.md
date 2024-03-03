@@ -80,7 +80,7 @@ In instances where array have decayed into pointer, or you declared array at run
   #include "template.cpp"
   #else
   #define debug(...)
-  #define debugArr(arr, n)
+  #define debugArr(...)
   #endif
   ```
 - When using it for LeetCode uncomment `#define cerr cout` and before submitting change `#ifndef` to `#ifdef` to ignore `debug(...);`. For convenience, after changing it, copy it, and keep it pinned in your clipboard for repetitive use.
