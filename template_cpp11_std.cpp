@@ -1,10 +1,10 @@
 #ifndef DEBUG_TEMPLATE_CPP
 #define DEBUG_TEMPLATE_CPP
 #include <bits/stdc++.h>
+using namespace std;
 // #define cerr cout
 namespace __DEBUG_UTIL__
 {
-    using namespace std;
     /* Primitive Datatypes Print */
     void print(const char *x) { cerr << x; }
     void print(bool x) { cerr << (x ? "T" : "F"); }
@@ -184,8 +184,8 @@ namespace __DEBUG_UTIL__
     }
 }
 #ifndef ONLINE_JUDGE
-#define debug(...) std::cerr << __LINE__ << ": [", __DEBUG_UTIL__::printer(#__VA_ARGS__, __VA_ARGS__)
-#define debugArr(...) std::cerr << __LINE__ << ": [", __DEBUG_UTIL__::printerArr(#__VA_ARGS__, __VA_ARGS__)
+#define debug(...) cerr << __LINE__ << ": [", __DEBUG_UTIL__::printer(#__VA_ARGS__, __VA_ARGS__)
+#define debugArr(...) cerr << __LINE__ << ": [", __DEBUG_UTIL__::printerArr(#__VA_ARGS__, __VA_ARGS__)
 #else
 #define debug(...)
 #define debugArr(...)
