@@ -76,7 +76,7 @@ namespace __DEBUG_UTIL__
     void printer(const char *names, T &&head, V &&...tail)
     {
         int i = 0;
-        for (size_t bracket = 0; names[i] != '\0' and (names[i] != ',' or bracket != 0); i++)
+        for (int bracket = 0; names[i] != '\0' and (names[i] != ',' or bracket > 0); i++)
             if (names[i] == '(' or names[i] == '<' or names[i] == '{')
                 bracket++;
             else if (names[i] == ')' or names[i] == '>' or names[i] == '}')
