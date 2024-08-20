@@ -151,7 +151,7 @@ namespace __DEBUG_UTIL__
     {
         /* Using && to capture both lvalues and rvalues */
         int i = 0;
-        for (size_t bracket = 0; names[i] != '\0' and (names[i] != ',' or bracket != 0); i++)
+        for (int bracket = 0; names[i] != '\0' and (names[i] != ',' or bracket > 0); i++)
             if (names[i] == '(' or names[i] == '<' or names[i] == '{')
                 bracket++;
             else if (names[i] == ')' or names[i] == '>' or names[i] == '}')
